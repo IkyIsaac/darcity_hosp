@@ -1,0 +1,52 @@
+{% load static %}
+{% include 'base.html' %}
+{% include 'navigation.html' %}
+
+{% block content %}
+{% if error == 'no' %}
+<script>
+    alert('Record saved successfully!');
+    window.location="{% url 'view_appointment' %}";
+</script>
+{% endif %}
+
+{% if error == 'yes' %}
+<script>
+    alert('Something went wrong. Try again');
+</script>
+{% endif %}
+
+<div class="container">
+    <div class="text-center">
+        <style>
+            h4{
+                color: red;
+            }
+        </style>
+        <h1>Enter new Appointment Details</h1>
+        <form action="add_appointment" method="POST">
+            {% csrf_token %}
+            <p>Doctor's name</p>
+            <select name="doctor" class="form-control">
+                {% for i in doctor %}
+                <option value="{{i.name}}">{{i.name}}</option>
+                {% endfor %}
+            </select>
+            <p>Patient name</p>
+            <select name="patient" class="form-control">
+                {% for i in patient %}
+                <option value="{{i.name}}">{{i.name}}</option>
+                {% endfor %}
+            </select>
+            <p>Date of appointment</p>
+            <input class="form-control" type="date" name="date">
+            <p>Date of appointment</p>
+            <input class="form-control" type="time" name="time">
+            <br>
+            <input class="form-control btn btn-primary" type="submit" value="Add">
+        </form>
+    </div>
+</div>
+{% endblock content %}
+
+{% include 'footer.html' %}

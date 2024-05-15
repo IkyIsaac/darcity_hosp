@@ -1,0 +1,39 @@
+{% include 'base.html' %}
+{% include 'navigation.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="text-center">
+        <h1> Admin Login</h1>
+        <style>
+            h3{
+                color: red;
+            }
+        </style>
+        {% for message in messages %}
+        <h3>{{message}}</h3>
+        {% endfor %}
+        <form action="admin_login" method="POST">
+            {% csrf_token %}
+            <p>Username</p>
+            <input class="form-control" type="text" name="username"/>
+            <p>Password: </p>
+            <input class="form-control" type="password" name="password"/>
+            <br/>
+            <input class="form-control btn btn-primary" type="submit" value="login">
+            <br>
+            <br>
+            <br>
+        </form>
+        <form action="register" method="POST">
+            {% csrf_token %}
+        <a href="login">
+            <button type="button">Signup</button>
+        </a>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
+<br><br><br><br><br><br><br><br><br>
+{% include 'footer.html' %}

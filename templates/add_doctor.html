@@ -1,0 +1,45 @@
+{% load static %}
+{% include 'base.html' %}
+{% include 'navigation.html' %}
+
+{% block content %}
+{% if error == 'no' %}
+<script>
+    alert('Record saved successfully!');
+    window.location="{% url 'view_doctor' %}";
+</script>
+{% endif %}
+
+{% if error == 'yes' %}
+<script>
+    alert('Something went wrong. Try again');
+</script>
+{% endif %}
+
+<div class="container">
+    <div class="text-center">
+        <style>
+            h4{
+                color: red;
+            }
+        </style>
+        <h1>Enter new Doctor's Details</h1>
+        {% for message in messages %}
+        <h4>{{message}}</h4>
+        {% endfor %}
+        <form action="add_doctor" method="POST">
+            {% csrf_token %}
+            <p>Enter name</p>
+            <input class="form-control" type="text" name="name">
+            <p>Enter Specialty</p>
+            <input class="form-control" type="text" name="special">
+            <p>Mobile Number</p>
+            <input class="form-control" type="tel" name="mobile">
+            <br>
+            <input class="form-control btn btn-primary" type="submit" value="Add">
+        </form>
+    </div>
+</div>
+{% endblock content %}
+
+{% include 'footer.html' %}
