@@ -1,1 +1,1 @@
-web: gunicorn hospital_mgt.wsgi
+web: gunicorn darcity_hosp.wsgi
